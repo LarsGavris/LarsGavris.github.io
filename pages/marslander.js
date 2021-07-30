@@ -1,5 +1,3 @@
-let main = () => {
-    console.log("hello world!");
+console.log("hello world!");
 
-    let screen = document.getElementById("canvas");
-}
+let screen = document.getElementById("canvas");
