@@ -2,6 +2,7 @@ let sprites = preloadSprites("lander.png");
 
 let canvas, ctx;
 let landscape, lander;
+let keyPressManager;
 
 
 let main = () => {
@@ -10,6 +11,7 @@ let main = () => {
     
     landscape = new Landscape(800, 600);
     lander = new Lander(new Vector(100,100), sprites["lander.png"]);
+    keyPressManager = new KeyPressManager();
 
     window.requestAnimationFrame(gameLoop);
 }
