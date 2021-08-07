@@ -4,9 +4,17 @@ class Lander {
         this.position = position;
         this.velocity = new Vector(0,0);
         this.acceleration = new Vector(0,0);
-        this.size = 50;
+        this.size = 200;
 
-        this.image = img;
+        // this.sprites = {
+        //     lander: sprites["lander.png"],
+        //     flame: {
+        //         bottom: sprites["lander_flame_bottom.png"],
+        //     }
+        // };
+        // this.animation = {
+        //     frame
+        // };
         this.thrust = {
             up:     0,
             down:   0,
@@ -17,8 +25,15 @@ class Lander {
         }
     }
 
-    draw (ctx) {
-        ctx.drawImage(this.image, this.position.x, this.position.y, this.size, this.size);
+    draw (ctx, gameFrame) {
+        animator.draw("lander", ctx, this.position, gameFrame);
+        if (this.thrust.up > 0) {
+            animator.draw("lander_flame_bottom", ctx, this.position, gameFrame);
+        }
+        // ctx.drawImage(this.sprites.lander, this.position.x, this.position.y, this.size, this.size);
+        // if (this.thrust.up > 0) {
+        //     ctx.drawImage(this.sprites.flame.bottom, )
+        // }
     }
 
     update () {
