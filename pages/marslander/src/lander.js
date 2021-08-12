@@ -6,15 +6,6 @@ class Lander {
         this.acceleration = new Vector(0,0);
         this.size = 200;
 
-        // this.sprites = {
-        //     lander: sprites["lander.png"],
-        //     flame: {
-        //         bottom: sprites["lander_flame_bottom.png"],
-        //     }
-        // };
-        // this.animation = {
-        //     frame
-        // };
         this.thrust = {
             up:     0,
             down:   0,
@@ -30,21 +21,17 @@ class Lander {
         if (this.thrust.up > 0) {
             animator.draw("lander_flame_bottom", ctx, this.position, gameFrame);
         }
-        // ctx.drawImage(this.sprites.lander, this.position.x, this.position.y, this.size, this.size);
-        // if (this.thrust.up > 0) {
-        //     ctx.drawImage(this.sprites.flame.bottom, )
-        // }
     }
 
     update () {
         // toggle thrust depending on pressed keys
-        if (keyPressManager.keys["KeyW"]) this.thrust.up += this.thrust.speed;
+        if (keyPressManager.keys["KeyW"] || keyPressManager.keys["ArrowUp"]) this.thrust.up += this.thrust.speed;
         else this.thrust.up = 0;
-        if (keyPressManager.keys["KeyA"]) this.thrust.left += this.thrust.speed;
+        if (keyPressManager.keys["KeyA"] || keyPressManager.keys["ArrowLeft"]) this.thrust.left += this.thrust.speed;
         else this.thrust.left = 0;
-        if (keyPressManager.keys["KeyS"]) this.thrust.down += this.thrust.speed;
+        if (keyPressManager.keys["KeyS"] || keyPressManager.keys["ArrowDown"]) this.thrust.down += this.thrust.speed;
         else this.thrust.down = 0;
-        if (keyPressManager.keys["KeyD"]) this.thrust.right += this.thrust.speed;
+        if (keyPressManager.keys["KeyD"] || keyPressManager.keys["ArrowRight"]) this.thrust.right += this.thrust.speed;
         else this.thrust.right = 0;
 
         // limit thrust

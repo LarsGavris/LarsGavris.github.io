@@ -12,6 +12,23 @@ class Animator {
         });
     }
 
+    /*  spritesData = {
+            sprites: [
+                {
+                    spriteName: "name",
+                    frameCount: 5,
+                    size: undefined,
+                    animationSpeed: 1
+                }
+            ]
+        }
+    */
+    async loadMany (spritesData) {
+        await Promise.all(spritesData.sprites.map(async sprite => {
+            return this.load(sprite.spriteName, sprite.frameCount, sprite.size, sprite.animationSpeed);
+        }));
+    }
+
     async load (spriteName, frameCount, size=undefined, animationSpeed=1) {
         if (frameCount < 0) throw Error("Error: frameCount must be 1 or greater");
 

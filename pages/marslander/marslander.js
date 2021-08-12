@@ -1,14 +1,20 @@
-// let sprites = preloadSprites("lander.png", "lander_flame_bottom.png");
-
 let zoom = [50,50];
 let animator = new Animator("./res/sprites");
-animator.load("lander", 1, zoom)
-    .then(() => {
-        return animator.load("lander_flame_bottom", 5, zoom);
-    })
-    .then(() => {
-        main();
-    });
+
+animator.loadMany({
+    sprites: [
+        {
+            spriteName: "lander",
+            frameCount: 1,
+            size: zoom
+        },
+        {
+            spriteName: "lander_flame_bottom",
+            frameCount: 5,
+            size: zoom
+        }
+    ]
+}).then(() => main());
 
 let canvas, ctx;
 let landscape, lander;
@@ -38,6 +44,3 @@ let gameLoop = (timeStamp) => {
     
     window.requestAnimationFrame(gameLoop);
 }
-
-// if (sprites[Object.keys(sprites)[0]].complete) main();
-// else sprites[Object.keys(sprites)[0]].addEventListener('load', main);
