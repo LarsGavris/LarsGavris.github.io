@@ -4,7 +4,12 @@ class Lander {
         this.position = position;
         this.velocity = new Vector(0,0);
         this.acceleration = new Vector(0,0);
-        this.size = 200;
+
+        this.collisionPoints = [
+            new Vector(10,40),
+            new Vector(40,40)
+        ];
+        this.collision = [];
 
         this.thrust = {
             up:     0,
@@ -21,6 +26,13 @@ class Lander {
         if (this.thrust.up > 0) {
             animator.draw("lander_flame_bottom", ctx, this.position, gameFrame);
         }
+        // ctx.strokeStyle = "white";
+        // ctx.lineWidth = 1;
+        // this.getCollisionPoints().forEach( p => {
+        //     ctx.beginPath();
+        //     ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI);
+        //     ctx.stroke();  
+        // })
     }
 
     update () {
@@ -53,7 +65,25 @@ class Lander {
         // apply drag
         this.velocity.scale(0.99);
 
+        // add collision influence
+        if (this.collision.length > 0) {
+            this.velocity.scale(0); 
+            alert("Crash!");
+            running = false;
+        }
+
         // apply veloctiy to position
         this.position.add(this.velocity);
+    }
+
+    getCollisionPoints() {
+        return this.collisionPoints.map(p => { return p.plus(this.position); });
+    }
+
+    addCollision(lineSegment) {
+        this.collision.push(lineSegment);
+    }
+    resetCollision() {
+        this.collision = [];
     }
 }

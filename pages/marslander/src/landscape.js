@@ -5,9 +5,11 @@ class Landscape {
         this.height = height;
 
         this.points = [];
-        let offset = 3 * this.height / 4; 
+        this.offset = 3 * this.height / 4; 
+        this.variance = 50;
         for (let i = 0; i < 20; i++) {
-            this.points.push( offset + Math.random() * 30);
+            let p = new Vector(i* (this.width / (20 - 1)), this.offset + Math.random() * this.variance);
+            this.points.push(p);
         }
     }
 
@@ -15,9 +17,7 @@ class Landscape {
         ctx.fillStyle = this.color;
         ctx.beginPath();
             ctx.moveTo(0, this.points[0]);
-            for (let i = 0; i < 20; i++) {
-                ctx.lineTo(i* (this.width / (20 - 1)), this.points[i]);
-            }
+            this.points.forEach( point => ctx.lineTo(point.x, point.y));
             ctx.lineTo(this.width, this.height);
             ctx.lineTo(0, this.height);
         ctx.closePath();

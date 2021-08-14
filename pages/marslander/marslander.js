@@ -17,14 +17,18 @@ animator.loadMany({
 }).then(() => main());
 
 let canvas, ctx;
+let collisionHandler;
 let landscape, lander;
 let keyPressManager;
 let frame;
+let running = true;
 
 let main = () => {
     canvas = document.getElementById("marslander-canvas");
     ctx = canvas.getContext("2d");
     
+    collisionHandler = new CollisionHandler();
+
     landscape = new Landscape(800, 600);
     lander = new Lander(new Vector(100,100));
     keyPressManager = new KeyPressManager();
@@ -35,7 +39,13 @@ let main = () => {
 }
 
 let gameLoop = (timeStamp) => {
+    if (!running) {
+        location.reload();
+        return;
+    }
+
     frame++;
+    collisionHandler.update();
     lander.update();
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
